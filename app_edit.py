@@ -36,12 +36,15 @@ def edit(name):
 
         recipe.steps = request.form['steps']
 
-        if request.files['file'].filename != '':
-            photo_file = request.files['file']
-            _, extension = os.path.splitext(photo_file.filename)
-            photo = f'./static/img/{name}{extension}'
-            photo_file.save(photo)    
-            recipe.photo = photo
+        try:
+            if request.files['file'].filename != '':
+                photo_file = request.files['file']
+                _, extension = os.path.splitext(photo_file.filename)
+                photo = f'./static/img/{name}{extension}'
+                photo_file.save(photo)    
+                recipe.photo = photo
+        except:
+            pass
         
         db.session.commit()
 

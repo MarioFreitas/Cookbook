@@ -9,9 +9,12 @@ def recipe(name, scaling=1):
     
     recipe = Recipe.query.get(name)
 
-    servings = recipe.servings * float(scaling)
-    if servings == int(servings):
-        servings = int(servings)
+    try:
+        servings = recipe.servings * float(scaling)
+        if servings == int(servings):
+            servings = int(servings)
+    except:
+        servings = ''
 
     amounts = []
     for ingredient in recipe.ingredients:

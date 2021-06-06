@@ -23,14 +23,17 @@ def new():
 
         steps = request.form['steps']
 
-        if request.files['file'].filename != '':
-            photo_file = request.files['file']
-            _, extension = os.path.splitext(photo_file.filename)
-            photo = f'./static/img/{name}{extension}'
-            photo_file.save(photo)    
-            photo = photo
-        else:
-            photo=''
+        try:
+            if request.files['file'].filename != '':
+                photo_file = request.files['file']
+                _, extension = os.path.splitext(photo_file.filename)
+                photo = f'./static/img/{name}{extension}'
+                photo_file.save(photo)    
+                photo = photo
+            else:
+                photo = ''
+        except:
+            photo = ''
         
         recipe = Recipe(name=name, prepTime=prepTime, cookingTime=cookingTime, 
                     servings=servings, videoURL=videoURL, sourceURL=sourceURL, 
