@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Mario's Cookbook</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../static/css/edit.css">
+    <link rel='stylesheet' href='../static/css/fonts.css'>
+</head>
+
+<body class="background-color">
+
+    <!-- Page Container -->
+    <div class="page-container">
+
+        {% if new == False %}
+        <form action="/edit/{{recipe.name}}" method="POST" enctype="multipart/form-data">
+        {% else %}
+        <form action="/new/" method="POST" enctype="multipart/form-data">
+        {% endif %}
+            <div class="form-item">
+                <label for="name">Recipe name: </label>
+                {% if new == False %}
+                <input type="text" id="name" name="name" value="{{recipe.name}}">
+                {% else %}
+                <input type="text" id="name" name="name">
+                {% endif %}
+
+            </div>
+
+            <div class="form-item">
+                <label for="prepTime">Prep. time: </label>
+                {% if new == False %}
+                <input type="text" id="prepTime" name="prepTime" value="{{recipe.prepTime}}">
+                {% else %}
+                <input type="text" id="prepTime" name="prepTime">
+                {% endif %}
+            </div>
+
+            <div class="form-item">
+                <label for="cookingTime">Cooking time: </label>
+                {% if new == False %}
+                <input type="text" id="cookingTime" name="cookingTime" value="{{recipe.cookingTime}}">
+                {% else %}
+                <input type="text" id="cookingTime" name="cookingTime">
+                {% endif %}
+            </div>
+
+            <div class="form-item">
+                <label for="servings">Servings: </label>
+                {% if new == False %}
+                <input type="number" step="1" id="servings" name="servings" value="{{recipe.servings}}">
+                {% else %}
+                <input type="number" step="1" id="servings" name="servings">
+                {% endif %}
+            </div>
+
+            <div class="form-item">
+                <label for="videoURL">Video URL: </label>
+                {% if new == False %}
+                <input type="text" id="videoURL" name="videoURL" value="{{recipe.videoURL}}">
+                {% else %}
+                <input type="text" id="videoURL" name="videoURL">
+                {% endif %}
+            </div>
+
+            <div class="form-item">
+                <label for="sourceURL">Source URL: </label>
+                {% if new == False %}
+                <input type="text" id="sourceURL" name="sourceURL" value="{{recipe.sourceURL}}">
+                {% else %}
+                <input type="text" id="sourceURL" name="sourceURL">
+                {% endif %}
+            </div>
+
+            <div class="form-item">
+                <label for="category">Category: </label>
+                <div class="custom-select" style="width:200px;">
+                    {% if new == False %}
+                    <select id="category" name="category">
+                        {% for c in categories%}
+                            <option value="{{c}}" {%if recipe.category == c %} selected {% endif %}> {{c}} </option>
+                        {% endfor %}
+                    </select>
+                    {% else %}
+                    <select id="category" name="category">
+                        {% for c in categories%}
+                            <option value="{{c}}" > {{c}} </option>
+                        {% endfor %}
+                    </select>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="form-item">
+                <label for="tags">Tags: </label>
+                {% if new == False %}
+                <input type="text" id="tags" name="tags" value="{{recipe.tags}}">
+                {% else %}
+                <input type="text" id="tags" name="tags">
+                {% endif %}
+            </div>
+
+            <div class="form-item">
+                <label for="photo">Photo: </label>
+                <input type="file" id="file" name="file">
+            </div>
+
+            <div class="form-item">
+                <label for="favorite">Favorite: </label>
+                <div class="custom-select" style="width:200px;">
+                    <select id="favorite" name="favorite">
+                        {% if new == False %}
+                        {% if recipe.favorite == False %}
+                        <option value="0" selected>False</option>
+                        <option value="1">True</option>
+                        {% else %}
+                        <option value="0">False</option>
+                        <option value="1" selected>True</option>
+                        {% endif %}
+                        {% else %}
+                        <option value="0">False</option>
+                        <option value="1">True</option>
+                        {% endif %}
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-item">
+                <label for="ingredients">Ingredients: </label>
+                {% if new == False %}
+                <textarea id="ingredients" name="ingredients" rows="20" cols="50">
+{% for i in n_amounts %}{{ amounts[i] }} {{ recipe.ingredients[i].unit }} {{ recipe.ingredients[i].name }}
+{% endfor %}</textarea>
+                {% else %}
+                <textarea id="ingredients" name="ingredients" rows="20" cols="50"></textarea>
+                {% endif %}
+            </div>
+
+            <div class="form-item">
+                <label for="steps">Steps: </label>
+                {% if new == False %}
+                <textarea id="steps" name="steps" rows="20" cols="50">{{recipe.steps}}</textarea>
+                {% else %}
+                <textarea id="steps" name="steps" rows="20" cols="50"></textarea>
+                {% endif %}
+            </div>
+
+            <div class="form-item-submit">
+                <input type="submit" value="Submit">
+            </div>
+
+        </form>
+
+        <!-- End Page Container -->
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p class='footer-item'>👨‍🍳 Mario's Cookbook 👨‍🍳</p>
+        <div class='footer-grid'>
+            <div class='footer-item'><a href="/"> Home</a></div>
+            <div class='footer-item'><a href="/new"> Create new recipe</a></div>
+        </div>
+    </footer>
+</body>
+
+</html>

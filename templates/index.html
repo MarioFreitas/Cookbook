@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Mario's Cookbook</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../static/css/index.css">
+    <link rel='stylesheet' href='../static/css/fonts.css'>
+</head>
+
+<body>
+    <header>
+        <div class="header-container">
+            <div class="form">
+                <form action="/" method="POST">
+                    <label for="fname">Category</label>
+                    <select id="category" name="category">
+                        <option value="All" {%if category == 'All' %} selected {%endif%}> All </option>
+                        {% for c in categories%}
+                            <option value="{{c}}" {%if category == c %} selected {% endif %}> {{c}} </option>
+                        {% endfor %}
+                    </select>
+                    
+                    <label for="fname">Favorite</label>
+                    <input type="checkbox", name="favorite" {%if favorite%}checked="checked"{%endif%}>
+
+                    <label for="fname">Tag</label>
+                    <input type="text" name="tags" value="{{tags}}">
+
+                    <input type="submit" value="Filter">
+                </form>
+            </div>
+        </div>
+    </header>
+
+    {%for recipe in recipes%}
+
+    <div class="responsive">
+        <div class="gallery">
+            <a target="_self" href="/recipe/{{recipe.name}}&scaling=1">
+                <img src="{{recipe.photo}}" alt="{{recipe.name}}" width="600" height="400">
+            </a>
+            <div class="desc">{{recipe.name}}</div>
+        </div>
+    </div>
+
+    {%endfor%}
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p class='footer-item'>👨‍🍳 Mario's Cookbook 👨‍🍳</p>
+        <div class='footer-grid'>
+            <div class='footer-item'><a href="/"> Home</a></div>
+            <div class='footer-item'><a href="/new"> Create new recipe</a></div>
+        </div>
+    </footer>
+</body>
+</html>
