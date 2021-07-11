@@ -40,22 +40,18 @@
             <img src="../static/img/servings.png" class="img-details"> 
             <span>Servings: {{ servings }}</span>
           </div>
+
+          {% if recipe.videoURL != '' %}
+            <div class="image-text">
+              <a href= {{ recipe.videoURL }} target="_blank"><img src="../static/img/videoURL.png" class="img-details"> Video</a> 
+            </div>
+          {% endif %}
+          
+          {% if recipe.sourceURL != '' %}
           <div class="image-text">
-            {% if recipe.videoURL != '' %}
-            <a href= {{ recipe.videoURL }} target="_blank"><img src="../static/img/videoURL.png" class="img-details"></a> 
-            {% else %}
-            <img src="../static/img/videoURL.png" class="img-details">
-            {% endif %}
-            <span>Video</span>
+            <a href={{ recipe.sourceURL }} target="_blank"><img src="../static/img/sourceURL.png" class="img-details"> Source</a> 
           </div>
-          <div class="image-text">
-            {% if recipe.sourceURL != '' %}
-            <a href={{ recipe.sourceURL }} target="_blank"><img src="../static/img/sourceURL.png" class="img-details"></a> 
-            {% else %}
-            <img src="../static/img/sourceURL.png" class="img-details">
-            {% endif %}
-            <span>Source</span>
-          </div>
+          {% endif %}
           
           <hr>
           

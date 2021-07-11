@@ -2,15 +2,24 @@ from flask import Flask, render_template, url_for, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 import os
+import re
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///recipe.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_NATIVE_UNICODE'] = 'utf8mb4'
 
-known_units = ['g', 'kg', 'mg', 'lb', 'l', 'ml', 'tsp', 'tbsp', 
-               'teaspoon', 'teaspoons', 'tablespoon', 'tablespoon', 
-               'cup', 'cups', 'quart', 'quarts', 'can', 'cans',
+known_units = ['g', 'gram', 'grams', 
+               'kg', 'kilo', 'kilos', 'kilogram', 'kilograms', 
+               'mg', 'miligram', 'miligrams', 
+               'lb', 'pound', 'pounds',
+               'l', 'L', 'liter', 'liters',
+               'ml', 'mL', 'mililiter', 'mililiters',
+               'tsp', 'teaspoon', 'teaspoons', 'c. à thé',
+               'tbsp', 'tablespoon', 'tablespoons', 'c. à table',
+               'cup', 'cups', 'tasse', 'tasses', 'de tasse'
+               'quart', 'quarts', 
+               'can', 'cans',
                'bottle', 'bottles']
 
 known_categories = ['Bread', 'Desert', 'Main dish', 'Salad', 'Snack', 'Soup', 'Others']
