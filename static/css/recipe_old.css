@@ -9,10 +9,6 @@ body{--themeColor: #009688; --grey:#757575;}
 .grid{display: grid;  grid-template-columns: 33.333% 66.666%; padding-left:20px; padding-right:20px;}
 .left-column{width:100%;padding-right:10px;}
 .right-column{width:100%;padding-left:10px;}
-.responsive{padding: 0 6px;float: left;width: 33.33332%;}
-@media only screen and (max-width: 500px) {.responsive {width: 100%;}}
-.responsive-right{padding: 0 6px;float: left;width: 66.66665%;}
-@media only screen and (max-width: 500px) {.responsive-right {width: 100%;}}
 
 /* Left Column */
 .left-container{background-color:#fff!important; box-shadow:0 4px 10px 0 rgba(0,0,0,0.2),0 4px 20px 0 rgba(0,0,0,0.19);}
