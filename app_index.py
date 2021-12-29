@@ -17,7 +17,7 @@ def index(category='All', favorite=False, tags=''):
         recipes = [i for i in recipes if category == i.category]
 
     if tags != '':
-        recipes = [i for i in recipes if tags.lower() in i.tags.lower()]
+        recipes = [i for i in recipes if (tags.lower() in i.tags.lower()) or (tags.lower() in i.name.lower())]
     
     if favorite:
         recipes = [i for i in recipes if i.favorite]
