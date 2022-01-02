@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Mario's Cookbook</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/static/css/edit.css">
+    <link rel='stylesheet' href='/static/css/fonts.css'>
+</head>
+
+<body class="background-color">
+
+    <!-- Page Container -->
+    <div class="page-container">
+
+        {% if new == False %}
+        <form action="/Air-Fryer/Edit/{{recipe.name}}" method="POST" enctype="multipart/form-data">
+        {% else %}
+        <form action="/Air-Fryer/New" method="POST" enctype="multipart/form-data">
+        {% endif %}
+            <div class="form-item">
+                <label for="name">Name: </label>
+                {% if new == False %}
+                <input type="text" id="name" name="name" value="{{recipe.name}}">
+                {% else %}
+                <input type="text" id="name" name="name">
+                {% endif %}
+            </div>
+
+            <div class="form-item">
+                <label for="temperature">Temp.: </label>
+                {% if new == False %}
+                <input type="number" id="temperature" name="temperature" value="{{recipe.temperature}}">
+                {% else %}
+                <input type="number" id="temperature" name="temperature">
+                {% endif %}
+            </div>
+
+            <div class="form-item">
+                <label for="time">Time: </label>
+                {% if new == False %}
+                <input type="number" id="time" name="time" value="{{recipe.time}}">
+                {% else %}
+                <input type="number" id="time" name="time">
+                {% endif %}
+            </div>
+
+            <div class="form-item">
+                <label for="notes">Notes: </label>
+                {% if new == False %}
+                <input type="text" step="1" id="notes" name="notes" value="{{recipe.notes}}">
+                {% else %}
+                <input type="text" step="1" id="notes" name="notes">
+                {% endif %}
+            </div>
+
+
+            <div class="form-item-submit">
+                <input type="submit" value="Submit">
+            </div>
+
+        </form>
+
+        <!-- End Page Container -->
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p class='footer-item'>👨‍🍳 Mario's Cookbook 👨‍🍳</p>
+        <div class='footer-grid'>
+            <div class='footer-item'><a href="/"> Home</a></div>
+            <div class='footer-item'><a href="/new"> Create new recipe</a></div>
+        </div>
+    </footer>
+</body>
+
+</html>

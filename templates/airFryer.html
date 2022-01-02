@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Mario's Cookbook</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="../static/css/airFryer.css">
+<link rel='stylesheet' href='../static/css/fonts.css'>
+</head>
+
+<body class="background-color">
+
+<!-- Page Container -->
+<div class="page-container">
+  <!-- Right Column -->
+  <div class="responsive-right">
+      
+    <div class="steps-container">
+      <!-- <hr> -->
+      <div class="image-text">
+        <img src="../static/img/steps.png" class="img-steps">
+        <span class="steps-title">Air Fryer</span>
+      </div>
+      <div class="inside-container">
+        <table>
+          <tr>
+            <th>Name</th>
+            <th>Temp.</th>
+            <th>Time</th>
+            <th>Notes</th>
+          </tr>
+          {% for recipe in recipes %}
+          <tr>
+            <td><a href="/Air-Fryer/Edit/{{recipe.name}}">{{ recipe.name }}</td>
+            <td>{{ recipe.temperature }}°F</td>
+            <td>{{ recipe.time }} min</td>
+            <td>{{ recipe.notes }}</td>
+          </tr>
+          {% endfor %}
+        </table>
+      </div>
+    </div>
+
+
+  <!-- End Right Column -->
+  </div>
+    
+<!-- End Page Container -->
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+  <p class='footer-item'>👨‍🍳 Mario's Cookbook 👨‍🍳</p>
+  <div class='footer-grid'>
+    <div class='footer-item'><a href= "/"> Home</a></div>
+    <div class='footer-item'><a href= "/Air-Fryer/New"> Add new entry</a></div>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Mario's Cookbook</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="../static/css/instantPot.css">
+<link rel='stylesheet' href='../static/css/fonts.css'>
+</head>
+
+<body class="background-color">
+
+<!-- Page Container -->
+<div class="page-container">
+  <!-- Right Column -->
+  <div class="responsive-right">
+      
+    <div class="steps-container">
+      <!-- <hr> -->
+      <div class="image-text">
+        <img src="../static/img/steps.png" class="img-steps">
+        <span class="steps-title">Instant Pot</span>
+      </div>
+
+      <h4>*** Always pressure cook with a MINIMUM of 2 cups of water ***</h4>
+
+      <div class="inside-container">
+        <table>
+          <tr>
+            <th>Name</th>
+            <th>Method</th>
+            <th>Water</th>
+            <th>Quantity</th>
+            <th>Time</th>
+            <th>Venting</th>
+            <th>Notes</th>
+          </tr>
+          {% for recipe in recipes %}
+          <tr>
+            <td><a href="/Instant-Pot/Edit/{{recipe.name}}">{{ recipe.name }}</td>
+            <td>{{ recipe.method }}</td>
+            <td>{{ recipe.water }}</td>
+            <td>{{ recipe.quantity }}</td>
+            <td>{{ recipe.time }}</td>
+            <td>{{ recipe.venting }}</td>
+            <td>{{ recipe.notes }}</td>
+          </tr>
+          {% endfor %}
+        </table>
+      </div>
+    </div>
+
+
+  <!-- End Right Column -->
+  </div>
+    
+<!-- End Page Container -->
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+  <p class='footer-item'>👨‍🍳 Mario's Cookbook 👨‍🍳</p>
+  <div class='footer-grid'>
+    <div class='footer-item'><a href= "/"> Home</a></div>
+    <div class='footer-item'><a href= "/Instant-Pot/New"> Add new entry</a></div>
+  </div>
+</footer>
+</body>
+</html>
