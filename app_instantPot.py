@@ -8,7 +8,7 @@ def instantPot():
 @app.route('/Instant-Pot/New', methods=['POST', 'GET'])
 def instantPot_New():
     if request.method == 'GET':
-        return render_template('instantPot_Edit.html', new=True)
+        return render_template('instantPot_edit.html', new=True)
 
     if request.method == 'POST':
         name = request.form['name']
@@ -31,7 +31,7 @@ def instantPot_Edit(name):
     recipe = InstantPot.query.get(name)
 
     if request.method == 'GET':
-        return render_template('instantPot_Edit.html', new=False, recipe=recipe)
+        return render_template('instantPot_edit.html', new=False, recipe=recipe)
 
     if request.method == 'POST':
         recipe.name = request.form['name']
