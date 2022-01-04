@@ -5,7 +5,7 @@ def airFryer():
     recipes = AirFryer.query.order_by(AirFryer.name)
     return render_template('airFryer.html', recipes=recipes)
 
-@app.route('/Air-Fryer/New/', methods=['POST', 'GET'])
+@app.route('/Air-Fryer/New', methods=['POST', 'GET'])
 def airFryer_New():
     if request.method == 'GET':
         return render_template('airFryer_edit.html', new=True)
