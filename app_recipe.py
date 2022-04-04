@@ -18,7 +18,7 @@ def recipe(name, scaling=1):
 
     amounts = []
     for ingredient in recipe.ingredients:
-        amount = ingredient.amount * float(scaling)
+        amount = round(ingredient.amount * float(scaling), 3)
         if amount == int(amount):
             amount = int(amount)
         amounts.append(amount)
