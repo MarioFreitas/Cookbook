@@ -13,6 +13,13 @@
     <div class="header-container">
         <div class="form">
             <form id="filter" action="/Freezer" method="POST">
+                <label for="fname">Search</label>
+                {% if tags == 'none' %}
+                  <input type="text" name="tags" value="">
+                {% else %}
+                  <input type="text" name="tags" value="{{tags}}">
+                {% endif %}
+
                 <label for="fname">Category</label>
                 <select id="category" name="category" onchange="post()">
                     <option value="All" {%if category == 'All' %} selected {%endif%}> All </option>
@@ -21,13 +28,6 @@
                     {% endfor %}
                 </select>
                 
-                <label for="fname">Search</label>
-                {% if tags == 'none' %}
-                  <input type="text" name="tags" value="">
-                {% else %}
-                  <input type="text" name="tags" value="{{tags}}">
-                {% endif %}
-
                 <label for="fname">Order By</label>
                 <select id="order" name="order" onchange="post()">
                     <option value="Name" {%if order == 'Name' %} selected {%endif%}> Name </option>
@@ -65,11 +65,21 @@
             <th>Edit</th>
           </tr>
           {% for item in items %}
-          <tr>
-            <td><a href="/Freezer/Edit/{{item.name}}">{{ item.name }}</td>
-            <td>{{ item.quantity }} {{ item.unit }}</td>
-            <td><a href="/Freezer/Filter/{{category}}/{{tags}}/{{order}}/{{quantityFilter}}/{{item.name}}/Plus">+</a>/<a href="/Freezer/Filter/{{category}}/{{tags}}/{{order}}/{{quantityFilter}}/{{item.name}}/Minus">-</a></td>
-          </tr>
+            {% if item.unit == 'x' %}
+              <tr>
+                <td colspan="3"> <a href="/Freezer/Edit/{{item.name}}"><strong> {{ item.name }} </strong></td>
+              </tr>
+            {% else %}
+              <tr>
+                <td><a href="/Freezer/Edit/{{item.name}}">{{ item.name }}</td>
+                {% if item.quantity|int != item.quantity %}
+                  <td>{{ item.quantity }} {{ item.unit }}</td>
+                {% else %}
+                  <td>{{ item.quantity|int }} {{ item.unit }}</td>
+                {%endif%}
+                <td><a href="/Freezer/Filter/{{category}}/{{tags}}/{{order}}/{{quantityFilter}}/{{item.name}}/Plus">+</a>/<a href="/Freezer/Filter/{{category}}/{{tags}}/{{order}}/{{quantityFilter}}/{{item.name}}/Minus">-</a></td>
+              </tr>
+            {% endif %}
           {% endfor %}
         </table>
       </div>

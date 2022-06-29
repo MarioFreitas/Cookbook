@@ -3,9 +3,12 @@ from app_config import *
 @app.route('/Freezer/Filter/<category>/<tags>/<order>/<quantityFilter>', methods=['POST', 'GET'])
 def freezer_filter(category='All', tags='', order='Name', quantityFilter='Show All'):
     if order == 'Quantity':
-        items = Freezer.query.order_by(Freezer.quantity)
+        items = Freezer.query.order_by(Freezer.category, Freezer.quantity, Freezer.name)
     else:
-        items = Freezer.query.order_by(Freezer.name)
+        items = Freezer.query.order_by(Freezer.category, Freezer.name)
+
+    cat_Beef = Freezer(name='Beef', quantity=-1, unit='', category='Category')
+
 
     if category != 'All':
         items = [i for i in items if category == i.category]
@@ -24,11 +27,6 @@ def freezer_filter(category='All', tags='', order='Name', quantityFilter='Show A
 
 @app.route('/Freezer', methods=['POST', 'GET'])
 def freezer(category='All', tags='none', order='Name', quantityFilter='Show All'):
-    if order == 'Quantity':
-        items = Freezer.query.order_by(Freezer.quantity)
-    else:
-        items = Freezer.query.order_by(Freezer.name)
-
     if request.method == 'POST':
         category = request.form.get('category')
         tags = request.form['tags']
