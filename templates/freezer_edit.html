@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Mario's Cookbook</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/static/css/edit.css">
+    <link rel='stylesheet' href='/static/css/fonts.css'>
+</head>
+
+<body class="background-color">
+
+    <!-- Page Container -->
+    <div class="page-container">
+
+        {% if new == False %}
+        <form action="/Freezer/Edit/{{item.name}}" method="POST" enctype="multipart/form-data">
+        {% else %}
+        <form action="/Freezer/New" method="POST" enctype="multipart/form-data">
+        {% endif %}
+            <div class="form-item">
+                <label for="name">Name: </label>
+                {% if new == False %}
+                <input type="text" id="name" name="name" value="{{item.name}}">
+                {% else %}
+                <input type="text" id="name" name="name">
+                {% endif %}
+            </div>
+
+            <div class="form-item">
+                <label for="quantity">Quantity: </label>
+                {% if new == False %}
+                <input type="text" id="quantity" name="quantity" value="{{item.quantity}}">
+                {% else %}
+                <input type="text" id="quantity" name="quantity">
+                {% endif %}
+            </div>
+
+            <div class="form-item">
+                <label for="unit">Unit: </label>
+                {% if new == False %}
+                <input type="text" id="unit" name="unit" value="{{item.unit}}">
+                {% else %}
+                <input type="text" id="unit" name="unit">
+                {% endif %}
+            </div>
+
+            <div class="form-item">
+                <label for="category">Category: </label>
+                <div class="custom-select" style="width:200px;">
+                    {% if new == False %}
+                    <select id="category" name="category">
+                        {% for c in categories%}
+                            <option value="{{c}}" {%if item.category == c %} selected {% endif %}> {{c}} </option>
+                        {% endfor %}
+                    </select>
+                    {% else %}
+                    <select id="category" name="category">
+                        {% for c in categories%}
+                            <option value="{{c}}" > {{c}} </option>
+                        {% endfor %}
+                    </select>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="form-item-submit">
+                <input type="submit" value="Submit">
+            </div>
+
+        </form>
+
+        <!-- End Page Container -->
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p class='footer-item'>👨‍🍳 Mario's Cookbook 👨‍🍳</p>
+        <div class='footer-grid'>
+            <div class='footer-item'><a href="/"> Home</a></div>
+            <div class='footer-item'><a href="/new"> Create new recipe</a></div>
+        </div>
+    </footer>
+</body>
+
+</html>

@@ -5,6 +5,7 @@ from app_edit import *
 from app_new import *
 from app_airFryer import *
 from app_instantPot import *
+from app_freezer import *
 import os
 
 if __name__ == '__main__':

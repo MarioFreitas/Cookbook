@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Mario's Cookbook</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/static/css/freezer.css">
+<link rel='stylesheet' href='/static/css/fonts.css'>
+</head>
+
+<body class="background-color">
+  <header>
+    <div class="header-container">
+        <div class="form">
+            <form id="filter" action="/Freezer" method="POST">
+                <label for="fname">Category</label>
+                <select id="category" name="category" onchange="post()">
+                    <option value="All" {%if category == 'All' %} selected {%endif%}> All </option>
+                    {% for c in categories%}
+                        <option value="{{c}}" {%if category == c %} selected {% endif %}> {{c}} </option>
+                    {% endfor %}
+                </select>
+                
+                <label for="fname">Search</label>
+                {% if tags == 'none' %}
+                  <input type="text" name="tags" value="">
+                {% else %}
+                  <input type="text" name="tags" value="{{tags}}">
+                {% endif %}
+
+                <label for="fname">Order By</label>
+                <select id="order" name="order" onchange="post()">
+                    <option value="Name" {%if order == 'Name' %} selected {%endif%}> Name </option>
+                    <option value="Quantity" {%if order == 'Quantity' %} selected {%endif%}> Quantity </option>
+                </select>
+
+                <label for="fname">Quantity Filter</label>
+                <select id="quantityFilter" name="quantityFilter" onchange="post()">
+                    <option value="Show All" {%if quantityFilter == 'Show All' %} selected {%endif%}> Show All </option>
+                    <option value="Show Only Zeroes" {%if quantityFilter == 'Show Only Zeroes' %} selected {%endif%}> Show Only Zeroes </option>
+                    <option value="Show Only Non-Zeroes" {%if quantityFilter == 'Show Only Non-Zeroes' %} selected {%endif%}> Show Only Non-Zeroes </option>
+                </select>
+            </form>
+        </div>
+    </div>
+</header>
+
+<!-- Page Container -->
+<div class="page-container">
+  <!-- Right Column -->
+  <div class="responsive-right">
+      
+    <div class="steps-container">
+      <!-- <hr> -->
+      <div class="image-text">
+        <img src="/static/img/steps.png" class="img-steps">
+        <span class="steps-title">Freezer List</span>
+      </div>
+
+      <div class="inside-container">
+        <table>
+          <tr>
+            <th>Name</th>
+            <th>Quantity</th>
+            <th>Edit</th>
+          </tr>
+          {% for item in items %}
+          <tr>
+            <td><a href="/Freezer/Edit/{{item.name}}">{{ item.name }}</td>
+            <td>{{ item.quantity }} {{ item.unit }}</td>
+            <td><a href="/Freezer/Filter/{{category}}/{{tags}}/{{order}}/{{quantityFilter}}/{{item.name}}/Plus">+</a>/<a href="/Freezer/Filter/{{category}}/{{tags}}/{{order}}/{{quantityFilter}}/{{item.name}}/Minus">-</a></td>
+          </tr>
+          {% endfor %}
+        </table>
+      </div>
+    </div>
+
+
+  <!-- End Right Column -->
+  </div>
+    
+<!-- End Page Container -->
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+  <p class='footer-item'>👨‍🍳 Mario's Cookbook 👨‍🍳</p>
+  <div class='footer-grid'>
+    <div class='footer-item'><a href= "/"> Home</a></div>
+    <div class='footer-item'><a href= "/Freezer/New"> Add new entry</a></div>
+  </div>
+</footer>
+
+<script>
+  function post() {
+    document.getElementById("filter").submit();
+  }
+  </script>
+</body>
+</html>

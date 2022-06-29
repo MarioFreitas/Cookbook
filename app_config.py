@@ -7,7 +7,8 @@ import re
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///recipe.db'
 app.config['SQLALCHEMY_BINDS'] = {'airFryer' : 'sqlite:///airFryer.db',
-                                  'instantPot': 'sqlite:///instantPot.db'}
+                                  'instantPot': 'sqlite:///instantPot.db',
+                                  'freezer': 'sqlite:///freezer.db'}
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_NATIVE_UNICODE'] = 'utf8mb4'
 
@@ -25,6 +26,7 @@ known_units = ['g', 'gram', 'grams',
                'bottle', 'bottles']
 
 known_categories = ['Bread', 'Desert', 'Main dish', 'Salad', 'Snack', 'Soup', 'Others']
+freezer_cateogries = ['Poultry', 'Pork', 'Beef', 'Fish and Seafood', 'Prepared Foods', 'Vegetables', 'Fruits', 'Bread', 'Dough', 'Others']
 
 db = SQLAlchemy(app)
 
@@ -78,11 +80,22 @@ class InstantPot(db.Model):
     def __repr__(self):
         return f'<InstantPot {self.name}>'
 
+class Freezer(db.Model):
+    __bind_key__ = 'freezer'
+    name = db.Column(db.String, nullable=False, unique=True, primary_key=True)
+    quantity = db.Column(db.Float, nullable=False)
+    unit = db.Column(db.String, nullable=False)
+    category = db.Column(db.String, nullable=False)
+
+    def __repr__(self):
+        return f'<Freezer {self.name}>'
+
 if __name__ == '__main__':
     db.create_all()
     db.create_all(bind='airFryer')
     db.create_all(bind='instantPot')
-    # beans = InstantPot(name='Black Beans (Dry)', method='Pressure High', water='cover', quantity='2 cups', time='20 mins', venting='Quick Release', notes=None)
-    # db.session.add(beans)
-    # db.session.commit()
+    db.create_all(bind='freezer')
+    chickenBreast = Freezer(name='Chicken Breast', quantity=3.0, unit='unit', category='Poultry')
+    db.session.add(chickenBreast)
+    db.session.commit()
     print('database created')
