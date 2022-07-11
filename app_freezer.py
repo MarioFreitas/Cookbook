@@ -1,3 +1,4 @@
+from matplotlib import category
 from app_config import *
 
 @app.route('/Freezer/Filter/<category>/<tags>/<order>/<quantityFilter>', methods=['POST', 'GET'])
@@ -39,10 +40,10 @@ def freezer(category='All', tags='none', order='Name', quantityFilter='Show All'
 
     return redirect(f'Freezer/Filter/{category}/{tags}/{order}/{quantityFilter}')
 
-@app.route('/Freezer/New', methods=['POST', 'GET'])
-def freezer_New():
+@app.route('/Freezer/New/Filter/<category>/<tags>/<order>/<quantityFilter>', methods=['POST', 'GET'])
+def freezer_New(category='All', tags='', order='Name', quantityFilter='Show All'):
     if request.method == 'GET':
-        return render_template('freezer_edit.html', new=True, categories = freezer_cateogries)
+        return render_template('freezer_edit.html', new=True, categories = freezer_cateogries, category=category, tags=tags, order=order, quantityFilter=quantityFilter)
 
     if request.method == 'POST':
         name = request.form['name']
@@ -55,14 +56,14 @@ def freezer_New():
         db.session.add(item)
         db.session.commit()
 
-        return redirect(f'/Freezer')
+        return redirect(f'/Freezer/Filter/{category}/{tags}/{order}/{quantityFilter}')
 
-@app.route('/Freezer/Edit/<name>', methods=['POST', 'GET'])
-def freezer_Edit(name):
+@app.route('/Freezer/Edit/<name>/Filter/<category>/<tags>/<order>/<quantityFilter>', methods=['POST', 'GET'])
+def freezer_Edit(name, category='All', tags='', order='Name', quantityFilter='Show All'):
     item = Freezer.query.get(name)
 
     if request.method == 'GET':
-        return render_template('freezer_edit.html', new=False, item=item, categories = freezer_cateogries)
+        return render_template('freezer_edit.html', new=False, item=item, categories = freezer_cateogries, category=category, tags=tags, order=order, quantityFilter=quantityFilter)
 
     if request.method == 'POST':
         item.name = request.form['name']
@@ -72,7 +73,7 @@ def freezer_Edit(name):
 
         db.session.commit()
 
-        return redirect(f'/Freezer')
+        return redirect(f'/Freezer/Filter/{category}/{tags}/{order}/{quantityFilter}')
 
 @app.route('/Freezer/Filter/<category>/<tags>/<order>/<quantityFilter>/<name>/<sign>', methods=['POST', 'GET'])
 def freezer_PlusMinus(category, tags, order, quantityFilter, name, sign):

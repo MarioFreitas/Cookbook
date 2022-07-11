@@ -26,7 +26,7 @@ known_units = ['g', 'gram', 'grams',
                'bottle', 'bottles']
 
 known_categories = ['Bread', 'Desert', 'Main dish', 'Salad', 'Snack', 'Soup', 'Others']
-freezer_cateogries = ['Poultry', 'Pork', 'Beef', 'Fish and Seafood', 'Prepared Foods', 'Vegetables', 'Fruits', 'Bread', 'Dough', 'Others']
+freezer_cateogries = ['Beef', 'Bread', 'Dough', 'Fish and Seafood', 'Fruits', 'Others', 'Pork', 'Poultry',  'Prepared Foods', 'Vegetables']
 
 db = SQLAlchemy(app)
 

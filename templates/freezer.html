@@ -67,11 +67,11 @@
           {% for item in items %}
             {% if item.unit == 'x' %}
               <tr>
-                <td colspan="3"> <a href="/Freezer/Edit/{{item.name}}"><strong> {{ item.name }} </strong></td>
+                <td colspan="3"> <a href="/Freezer/Edit/{{item.name}}/Filter/{{category}}/{{tags}}/{{order}}/{{quantityFilter}}"><strong> {{ item.name }} </strong></td>
               </tr>
             {% else %}
               <tr>
-                <td><a href="/Freezer/Edit/{{item.name}}">{{ item.name }}</td>
+                <td><a href="/Freezer/Edit/{{item.name}}/Filter/{{category}}/{{tags}}/{{order}}/{{quantityFilter}}">{{ item.name }}</td>
                 {% if item.quantity|int != item.quantity %}
                   <td>{{ item.quantity }} {{ item.unit }}</td>
                 {% else %}
@@ -97,7 +97,7 @@
   <p class='footer-item'>👨‍🍳 Mario's Cookbook 👨‍🍳</p>
   <div class='footer-grid'>
     <div class='footer-item'><a href= "/"> Home</a></div>
-    <div class='footer-item'><a href= "/Freezer/New"> Add new entry</a></div>
+    <div class='footer-item'><a href= "/Freezer/New/Filter/{{category}}/{{tags}}/{{order}}/{{quantityFilter}}"> Add new entry</a></div>
   </div>
 </footer>
 
