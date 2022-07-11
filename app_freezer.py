@@ -1,4 +1,3 @@
-from matplotlib import category
 from app_config import *
 
 @app.route('/Freezer/Filter/<category>/<tags>/<order>/<quantityFilter>', methods=['POST', 'GET'])
