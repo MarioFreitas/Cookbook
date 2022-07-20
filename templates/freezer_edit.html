@@ -17,7 +17,7 @@
         {% if new == False %}
         <form action="/Freezer/Edit/{{item.name}}/Filter/{{category}}/{{tags}}/{{order}}/{{quantityFilter}}" method="POST" enctype="multipart/form-data">
         {% else %}
-        <form action="/Freezer/New" method="POST" enctype="multipart/form-data">
+        <form action="/Freezer/New/Filter/{{category}}/{{tags}}/{{order}}/{{quantityFilter}}" method="POST" enctype="multipart/form-data">
         {% endif %}
             <div class="form-item">
                 <label for="name">Name: </label>
