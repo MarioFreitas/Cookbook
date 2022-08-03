@@ -71,7 +71,7 @@
               </tr>
             {% else %}
               <tr>
-                <td><a href="/Freezer/Edit/{{item.name}}/Filter/{{category}}/{{tags}}/{{order}}/{{quantityFilter}}">{{ item.name }}</td>
+                <td><a href="/Freezer/Edit/{{item.name}}/Filter/{{item.category}}/{{tags}}/{{order}}/{{quantityFilter}}">{{ item.name }}</td>
                 {% if item.quantity|int != item.quantity %}
                   <td>{{ item.quantity }} {{ item.unit }}</td>
                 {% else %}
