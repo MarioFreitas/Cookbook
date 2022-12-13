@@ -67,11 +67,11 @@
           <ul>
             {% for i in n_amounts %}
               {% if amounts[i] != 0 and recipe.ingredients[i].unit != ''%}
-                <li><strong>{{ amounts[i] }} {{ recipe.ingredients[i].unit }} </strong> {{ recipe.ingredients[i].name }}</li>
+                <li onclick="this.classList.toggle('struck-through')"><strong>{{ amounts[i] }} {{ recipe.ingredients[i].unit }} </strong> {{ recipe.ingredients[i].name }}</li>
               {% elif amounts[i] != 0 and recipe.ingredients[i].unit == ''%}
-                <li><strong>{{ amounts[i] }} </strong> {{ recipe.ingredients[i].name }}</li>
+                <li onclick="this.classList.toggle('struck-through')"><strong>{{ amounts[i] }} </strong> {{ recipe.ingredients[i].name }}</li>
               {% else %}
-              <li>{{ recipe.ingredients[i].name }}</li>
+              <li onclick="this.classList.toggle('struck-through')">{{ recipe.ingredients[i].name }}</li>
               {% endif %}
             {% endfor %}
           </ul>
