@@ -24,8 +24,10 @@ body{--themeColor: #009688; --grey:#757575;}
 
 /* Right Column */
 .steps-container{position: sticky; top: 16px; padding:0.01em 16px; box-shadow:0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12); color:#000!important;background-color:#fff!important; margin-bottom:16px!important}
+@media only screen and (min-width: 501px) {.steps-container {position: fixed;}}
 .steps-title{color:var(--grey)!important; font-size: 23pt; vertical-align: middle;}
 .inside-container{padding-left: 20px}
+
 
 /* Footer */
 .footer{padding:0.01em 16px; color:#fff!important;background-color:var(--themeColor)!important; text-align:center; display:inline-block;width:100%; margin-top:16px!important}
