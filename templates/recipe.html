@@ -93,7 +93,7 @@
         </div>
         <div class="inside-container">
           {% for step in steps %}
-            <p>{{ step }}</p>
+            <p onclick="this.classList.toggle('struck-through')">{{ step }}</p>
           {% endfor %}
         </div>
       </div>
